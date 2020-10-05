@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bing_etl_server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bing_etl_server
+    spec:
+      containers:
+      - name: bing_etl_server
+        image: bing_etl_server:latest
+        resources:
+          requests:
+            memory: "1Gi"
+          limits:
+            memory: "1Gi"
+        readinessProbe:
+          tcpSocket:
+            port: 9099
+          initialDelaySeconds: 90
+          periodSeconds: 20
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bing_etl_server-service
+spec:
+  type: NodePort
+  ports:
+  - port: 9099
+    targetPort: 9099
+  selector:
+    app: bing_etl_server
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    # kubernetes.io/ingress.class: "ma-frontend"
+  name: bing_etl_server-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: bing_etl_server-service
+          servicePort: 9099
