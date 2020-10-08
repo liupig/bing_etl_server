@@ -41,8 +41,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    ingress.kubernetes.io/rewrite-target: /
-    # kubernetes.io/ingress.class: "ma-frontend"
+    www.xxxxx.com/rewrite-target: /
   name: bing_etl_server-ingress
 spec:
   rules:
