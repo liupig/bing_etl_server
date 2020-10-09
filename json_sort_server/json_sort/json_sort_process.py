@@ -1,4 +1,12 @@
+import json
+
+
 def json_sort(input_data):
+    """
+    Less time consuming
+    :param input_data:
+    :return:
+    """
     def dict_sort_by_key(data):
         data = sorted(data.items(), key=lambda item: item[0])
         return {item[0]: item[1] for item in data}
@@ -17,3 +25,12 @@ def json_sort(input_data):
             input_data[i] = json_sort(input_data[i])
 
     return input_data
+
+
+def json_sort_simple(input_data):
+    """
+    Time consuming
+    :param input_data:
+    :return:
+    """
+    return json.loads(json.dumps(input_data, sort_keys=True, indent=4, separators=(',', ': ')))
