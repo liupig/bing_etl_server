@@ -1,0 +1,18 @@
+[
+  {
+    "respCode": 0,
+    "respMsg": "SUCCESS",
+    "errorCode": "000000",
+    "data": [
+      {
+        "geohashKey": [
+          "wtw3e",
+          "wtw3s",
+          "wtw3u"
+        ],
+        "geohashCode": "1"
+      }
+    ]
+  },
+  {}
+]
