@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script>
+            function showHint(str)
+            {
+              var xmlhttp;
+              if (str.length==0)
+              {
+                  var s = 1
+                //document.getElementById("Youtxt").innerHTML="";
+                //return;
+              }
+              if (window.XMLHttpRequest)
+              {
+                // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp=new XMLHttpRequest("Microsoft.XMLHTTP");
+              }
+              else
+              {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xmlhttp.onreadystatechange=function()
+              {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                  var input_json = JSON.parse(xmlhttp.responseText);
+                  if (xmlhttp.responseText != '' || xmlhttp.responseText != None)
+                  {
+                      var input_jsonText = document.getElementById("input_json");
+                      input_jsonText.value="";
+                      document.getElementById("Youtxt").innerHTML= str;
+                  }
+                  var input_json = document.getElementById('input_json').value
+                }
+              }
+              if (str.length > 0)
+              {
+                 xmlhttp.open("POST","/v1/bing/etl/jsonsort",true);
+                 xmlhttp.send();
+
+              }
+
+            }
+
+
+    </script>
+    <style>
+    body{ text-align:center}
+    #EE{margin:0 auto;width:400px;min-height:400px}
+
+    </style>
+    <style type="text/css">
+        .textarea-inherit {
+        width: 45%;
+        height: 45%;
+        overflow: auto;
+        word-break: break-all; //解决兼容问题
+    }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div>
+    <form target="_blank" action="/v1/bing/etl/comparison" enctype='multipart/form-data' method='post'>
+        <div>
+
+        <textarea rows="20" name="main" class="textarea-inherit" id="input_json" onkeyup="showHint(this.value)"
+                  placeholder="Please enter json text"></textarea>
+            <textarea rows="20" name="sub" class="textarea-inherit" id="Youtxt"></textarea>
+
+        </div>
+    </form>
+
+</div>
+
+
+</body>
+</html>

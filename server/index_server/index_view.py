@@ -1,8 +1,14 @@
 from flask import Blueprint, render_template
 
-INDEX = Blueprint("index", __name__)
+TEXT_COMPARISON_INDEX = Blueprint("text_comparison_index", __name__)
+JSON_SORT_INDEX = Blueprint("json_sort_index", __name__)
 
 
-@INDEX.route("/index", methods=["GET"])
+@TEXT_COMPARISON_INDEX.route("/textc", methods=["GET"])
 def post_poi_mapping_data():
     return render_template('index.html', )
+
+
+@JSON_SORT_INDEX.route("/jsonsort", methods=["GET"])
+def post_poi_mapping_data():
+    return render_template('jsonSort.html', )
