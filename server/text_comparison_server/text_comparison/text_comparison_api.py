@@ -8,4 +8,5 @@ TEXT_COMPARISON_API = Blueprint("text_comparison_api", __name__)
 def post_poi_mapping_data():
     main = request.form.get("main")
     sub = request.form.get("sub")
-    return comparison_process(main, sub)
+    flag = request.form.get("json_sort_flag")
+    return comparison_process(main, sub, flag)

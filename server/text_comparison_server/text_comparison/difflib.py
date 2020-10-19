@@ -1686,9 +1686,10 @@ _file_template = """
 </html>"""
 
 _styles = """
-        table.diff {font-family:Courier; border:medium; width="100%"}
+        table.diff {font-family:Courier; border:medium}
         .diff_header {background-color:#e0e0e0; width:15px}
         td.diff_header {text-align:right}
+        td.counter_text {overflow:hidden; word-break:keep-all;}
         .diff_next {background-color:#c0c0c0; width:15px}
         .diff_add {background-color:#aaffaa}
         .diff_chg {background-color:#ffff77}
@@ -1697,7 +1698,7 @@ _styles = """
 
 _table_template = """
     <table class="diff" id="difflib_chg_%(prefix)s_top" width="100&#37"
-           cellspacing="0" cellpadding="0" rules="groups" >
+           cellspacing="0" cellpadding="0" rules="groups" style="table-layout:fixed;" >
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
         %(header_row)s
@@ -1940,7 +1941,7 @@ class HtmlDiff(object):
         # make space non-breakable so they don't get compressed or line wrapped
         text = text.replace(' ', '&nbsp;').rstrip()
 
-        return '<td class="diff_header"%s>%s</td><td nowrap="nowrap">%s</td>' \
+        return '<td class="diff_header"%s>%s</td><td nowrap="nowrap" class="counter_text">%s</td>' \
                % (id, linenum, text)
 
     def _make_prefix(self):
