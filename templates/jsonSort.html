@@ -4,13 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <script>
-            function showHint(str)
+            function showHint(str1)
             {
               var xmlhttp;
-              if (str.length==0)
+              if (str1.length==0)
               {
                   var s = 1
-                //document.getElementById("Youtxt").innerHTML="";
+                //document.getElementById("output_json").innerHTML="";
                 //return;
               }
               if (window.XMLHttpRequest)
@@ -28,29 +28,35 @@
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
                   var input_json = JSON.parse(xmlhttp.responseText);
+                  document.getElementById("output_json").innerHTML= input_json.data
+
                   if (xmlhttp.responseText != '' || xmlhttp.responseText != None)
                   {
                       var input_jsonText = document.getElementById("input_json");
                       input_jsonText.value="";
-                      document.getElementById("Youtxt").innerHTML= str;
                   }
-                  var input_json = document.getElementById('input_json').value
                 }
               }
-              if (str.length > 0)
+              if (str1.length > 0)
               {
                  xmlhttp.open("POST","/v1/bing/etl/jsonsort",true);
-                 xmlhttp.send();
-
+                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                 xmlhttp.send('main=' + str1);
               }
 
             }
+
+
+
 
 
     </script>
     <style>
     body{ text-align:center}
     #EE{margin:0 auto;width:400px;min-height:400px}
+
+
+
 
     </style>
     <style type="text/css">
@@ -62,6 +68,9 @@
     }
 
 
+
+
+
     </style>
 
 </head>
@@ -71,15 +80,17 @@
 
 
 <div>
-    <form target="_blank" action="/v1/bing/etl/comparison" enctype='multipart/form-data' method='post'>
-        <div>
 
-        <textarea rows="20" name="main" class="textarea-inherit" id="input_json" onkeyup="showHint(this.value)"
-                  placeholder="Please enter json text"></textarea>
-            <textarea rows="20" name="sub" class="textarea-inherit" id="Youtxt"></textarea>
+    <div>
+        <form name="inputform" action="somewhere" method="post">
+                <textarea rows="20" name="main" class="textarea-inherit" id="input_json" onkeyup="showHint(this.value)"
+          placeholder="Please enter json text" value="maindata"></textarea>
+                <textarea rows="20" name="sub" class="textarea-inherit" id="output_json"></textarea>
+        </form>
 
-        </div>
-    </form>
+
+    </div>
+
 
 </div>
 
