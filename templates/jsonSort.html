@@ -27,9 +27,15 @@
               {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
-                  var input_json = JSON.parse(xmlhttp.responseText);
-                  document.getElementById("output_json").innerHTML= input_json.data
-
+                  var response_json = JSON.parse(xmlhttp.responseText);
+                  if (response_json.errorCode == null)
+                  {
+                      document.getElementById("output_json").innerHTML= response_json.data
+                  }else{
+                      document.getElementById("output_json").innerHTML= '---------------------------ERROR----------------------------\n' +
+                      '------------------------------------------------------------\n\n' +
+                      response_json.errorInfo + '\n\n---------------------------ERROR----------------------------'
+                  }
                   if (xmlhttp.responseText != '' || xmlhttp.responseText != None)
                   {
                       var input_jsonText = document.getElementById("input_json");
