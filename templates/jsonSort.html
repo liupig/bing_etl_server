@@ -57,10 +57,29 @@
 
 
 
+
+
+
     </script>
+
+    <script type="text/javascript">
+         function copyText() {
+              var input = document.getElementById("output_json");
+              input.select(); // 选中文本
+              document.execCommand("copy"); // 执行浏览器复制命令
+
+         }
+
+
+    </script>
+
+
     <style>
     body{ text-align:center}
     #EE{margin:0 auto;width:400px;min-height:400px}
+
+
+
 
 
 
@@ -73,6 +92,9 @@
         overflow: auto;
         word-break: break-all; //解决兼容问题
     }
+
+
+
 
 
 
@@ -91,10 +113,10 @@
     <div>
         <form name="inputform" action="somewhere" method="post">
                 <textarea rows="30" name="main" class="textarea-inherit" id="input_json" onkeyup="showHint(this.value)"
-          placeholder="Please enter json text" value="maindata"></textarea>
-                <textarea rows="30" name="sub" class="textarea-inherit" id="output_json"></textarea>
+                          placeholder="Please enter json text" value="maindata"></textarea>
+            <textarea rows="30" name="sub" class="textarea-inherit" id="output_json"
+                      onclick="copyText()" placeholder="Click text to copy" readonly></textarea>
         </form>
-
 
     </div>
 
