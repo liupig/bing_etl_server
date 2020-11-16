@@ -12,7 +12,7 @@ def post_poi_mapping_data():
     main = request.form.to_dict().get("main")
     if "'" in main and '"' not in main:
         main = main.replace("'", '"')
-    if "'" in main and '"' in main:
+    elif "'" in main and '"' in main:
         if main.index('"', 1) > main.index("'", 1) and "_import_" not in main and "_from_" not in main:
             main = json.dumps(eval(main))
 
