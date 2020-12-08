@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Json Sort</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script>
+            function showHint(str1)
+            {
+              var xmlhttp;
+              if (str1.length==0)
+              {
+                  var s = 1
+                //document.getElementById("output_json").innerHTML="";
+                //return;
+              }
+              if (window.XMLHttpRequest)
+              {
+                // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp=new XMLHttpRequest("Microsoft.XMLHTTP");
+              }
+              else
+              {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xmlhttp.onreadystatechange=function()
+              {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                  var response_json = JSON.parse(xmlhttp.responseText);
+                  if (response_json.errorCode == null)
+                  {
+                      document.getElementById("output_json").innerHTML= response_json.data
+                  }else{
+                      document.getElementById("output_json").innerHTML= '---------------------------ERROR----------------------------\n' +
+                      '------------------------------------------------------------\n\n' +
+                      response_json.errorInfo + '\n\n---------------------------ERROR----------------------------'
+                  }
+                  if (xmlhttp.responseText != '' || xmlhttp.responseText != None)
+                  {
+                      var input_jsonText = document.getElementById("input_json");
+                      input_jsonText.value="";
+                  }
+                }
+              }
+              if (str1.length > 0 && (str1.charAt((str1.length - 1)) == '}' || str1.charAt((str1.length - 1)) == ']' || str1.charAt((str1.length - 1)) == ')'))
+              {
+                 xmlhttp.open("POST","/v1/bing/etl/jsonstring",true);
+                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                 xmlhttp.send('main=' + str1);
+              }
+
+            }
+
+
+
+
+
+
+
+
+    </script>
+
+    <script type="text/javascript">
+         function copyText() {
+              var input = document.getElementById("output_json");
+              input.select(); // 选中文本
+              document.execCommand("copy"); // 执行浏览器复制命令
+
+         }
+
+
+    </script>
+
+
+    <style>
+    body{ text-align:center}
+    #EE{margin:0 auto;width:400px;min-height:400px}
+
+
+
+
+
+
+
+    </style>
+    <style type="text/css">
+        .textarea-inherit {
+        width: 45%;
+        height: 80%;
+        overflow: auto;
+        word-break: break-all; //解决兼容问题
+    }
+
+
+
+
+
+
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div>
+
+    <div>
+        <form name="inputform" action="somewhere" method="post">
+                <textarea rows="30" name="main" class="textarea-inherit" id="input_json" onkeyup="showHint(this.value)"
+                          placeholder="Please enter json text" value="maindata"></textarea>
+            <textarea rows="30" name="sub" class="textarea-inherit" id="output_json"
+                      onclick="copyText()" placeholder="Click text to copy" readonly></textarea>
+        </form>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
