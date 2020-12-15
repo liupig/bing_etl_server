@@ -1687,7 +1687,7 @@ _file_template = """
 
 _styles = """
         table.diff {font-family:Courier; border:medium}
-        .diff_header {background-color:#e0e0e0; width:15px}
+        .diff_header {background-color:#e0e0e0; width:40px}
         td.diff_header {text-align:right}
         td.counter_text {overflow:hidden; word-break:keep-all;}
         .diff_next {background-color:#c0c0c0; width:15px}
