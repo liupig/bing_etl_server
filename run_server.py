@@ -6,6 +6,7 @@ from server.identifying_animals_server.identifying_animals.identifying_animals_a
 from server.index_server.index_view import TEXT_COMPARISON_INDEX, JSON_SORT_INDEX, JSON_STRING_INDEX
 
 APP = Flask(__name__)
+APP.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 APP.register_blueprint(JSON_SORT_API)
 APP.register_blueprint(JSON_STRING_API)
 APP.register_blueprint(JSON_SORT_V2_API)
