@@ -19,8 +19,8 @@ def post_poi_mapping_data():
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static/images/", filename))
             result = evaluate_one_image(filename)
-            return render_template('upload_ok.html', result=result, imagename=filename)
+            return render_template('upload_ok.html', result=result, imagename=f"/static/images/{filename}")
 
-        return render_template('upload_ok.html', result="耗子尾汁", imagename="error.jpg")
+        return render_template('upload_ok.html', result="耗子尾汁", imagename="/static/default_images/error.jpg")
 
     return render_template('upload_image.html')
