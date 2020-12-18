@@ -17,4 +17,4 @@ APP.register_blueprint(JSON_SORT_INDEX)
 APP.register_blueprint(JSON_STRING_INDEX)
 
 if __name__ == "__main__":
-    APP.run(host="0.0.0.0", port=9099, debug=True)
+    APP.run(host="0.0.0.0", port=9099, debug=False)
