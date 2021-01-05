@@ -7,7 +7,7 @@ JSON_STRING_API = Blueprint("json_string_api", __name__)
 
 
 @JSON_STRING_API.route("/v1/bing/etl/jsonstring", methods=["POST"])
-def post_poi_mapping_data():
+def post_json_string():
     main = request.form.to_dict().get("main")
     if "'" in main and '"' not in main:
         main = main.replace("'", '"')

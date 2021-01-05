@@ -5,7 +5,7 @@ TEXT_COMPARISON_API = Blueprint("text_comparison_api", __name__)
 
 
 @TEXT_COMPARISON_API.route("/v1/bing/etl/comparison", methods=["POST"])
-def post_poi_mapping_data():
+def post_text_comparison():
     main = request.form.get("main")
     sub = request.form.get("sub")
     flag = request.form.get("json_sort_flag")

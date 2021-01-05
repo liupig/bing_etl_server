@@ -6,15 +6,15 @@ JSON_STRING_INDEX = Blueprint("json_string_index", __name__)
 
 
 @TEXT_COMPARISON_INDEX.route("/textc", methods=["GET"])
-def post_poi_mapping_data():
+def post_index():
     return render_template('index.html', )
 
 
 @JSON_SORT_INDEX.route("/jsonsort", methods=["GET"])
-def post_poi_mapping_data():
+def post_json_sort():
     return render_template('jsonSort.html', )
 
 
 @JSON_STRING_INDEX.route("/jsonstring", methods=["GET"])
-def post_poi_mapping_data():
+def post_json_string():
     return render_template('jsonString.html', )

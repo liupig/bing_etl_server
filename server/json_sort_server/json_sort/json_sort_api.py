@@ -8,7 +8,7 @@ JSON_SORT_V2_API = Blueprint("json_sort_v2_api", __name__)
 
 
 @JSON_SORT_API.route("/v1/bing/etl/jsonsort", methods=["POST"])
-def post_poi_mapping_data():
+def post_json_sort():
     main = request.form.to_dict().get("main")
     if "'" in main and '"' not in main:
         main = main.replace("'", '"')
@@ -27,7 +27,7 @@ def post_poi_mapping_data():
 
 
 @JSON_SORT_V2_API.route("/v1/bing/etl/jsonsortapi", methods=["POST"])
-def post_poi_mapping_data():
+def post_json_sort_v2():
     request_data = request.get_json()
     check_result = security_check(request_data)
     if check_result.get("SecurityCheckResult") == "SUCCEED":

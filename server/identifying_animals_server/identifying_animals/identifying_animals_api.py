@@ -12,7 +12,7 @@ def allowed_file(filename):
 
 
 @IDENTIFYING_ANIMALS_API.route("/v1/bing/distinguish/animals", methods=["GET", "POST"])
-def post_poi_mapping_data():
+def post_identifying_animals():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
