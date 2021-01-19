@@ -3,9 +3,14 @@ from flask import Blueprint, render_template
 SERVER_INDEX = Blueprint("server_index", __name__)
 
 
-@SERVER_INDEX.route("/textc", methods=["GET"])
+@SERVER_INDEX.route("/index", methods=["GET"])
 def post_index():
     return render_template('index.html', )
+
+
+@SERVER_INDEX.route("/textComparison", methods=["GET"])
+def post_index():
+    return render_template('textComparison.html', )
 
 
 @SERVER_INDEX.route("/jsonsort", methods=["GET"])

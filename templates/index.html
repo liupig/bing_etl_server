@@ -3,28 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Text Comparison</title>
-    <style type="text/css">
-        .textarea-inherit {
-        width: 45%;
-        height: 45%;
-        overflow: auto;
-        word-break: break-all; //解决兼容问题
-    }
+    <style>
+        body {
+            text-align: center
+        }
+
+        #EE {
+            margin: 0 auto;
+            width: 400px;
+            min-height: 200px;
+            max-height: 250px
+        }
+
+
     </style>
 
 </head>
 <body>
-<form target="_blank" action="/v1/bing/etl/comparison" enctype='multipart/form-data' method='post'>
-    <div>
-        <textarea  rows="20" name="main" class="textarea-inherit"></textarea>
-        <textarea  rows="20" name="sub" class="textarea-inherit"></textarea>
-    </div>
-    <div>
-        <input name="json_sort_flag" type="checkbox" checked="on">json sort
-        <input type="submit" value="submit">
-    </div>
-
-</form>
+<dl>
+    <dt>&nbsp</dt>
+    <dd><a href="http://cc-z.com:9099/geo">Geo Server</a></dd>
+    <dt>&nbsp</dt>
+    <dd><a href="http://cc-z.com:9099/jsonsort">Json Sort Server</a></dd>
+    <dt>&nbsp</dt>
+    <dd><a href="http://cc-z.com:9099/jsonstring">Json String Server</a></dd>
+    <dt>&nbsp</dt>
+    <dd><a href="http://cc-z.com:9099/textComparison">Text Comparison Server</a></dd>
+    <dt>&nbsp</dt>
+    <dd><a href="http://cc-z.com:9099/v1/bing/distinguish/animals">Distinguish Animals Server</a></dd>
+    <dt>&nbsp</dt>
+</dl>
 
 </body>
 </html>
