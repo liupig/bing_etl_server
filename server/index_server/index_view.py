@@ -9,7 +9,7 @@ def post_index():
 
 
 @SERVER_INDEX.route("/textComparison", methods=["GET"])
-def post_index():
+def post_text_comparison():
     return render_template('textComparison.html', )
 
 
