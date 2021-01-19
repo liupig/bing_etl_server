@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GEO Server</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script>
+        function showDecodeHint(str1) {
+            var xmlhttp;
+            if (str1.length == 0) {
+                var s = 1
+            }
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest("Microsoft.XMLHTTP");
+            } else {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var response_json = JSON.parse(xmlhttp.responseText);
+                    if (response_json.errorCode == null) {
+                        document.getElementById("output_decode").innerHTML = response_json.data
+                    } else {
+                        document.getElementById("output_decode").innerHTML = '---------------------------ERROR----------------------------\n' +
+                            '------------------------------------------------------------\n\n' +
+                            response_json.errorInfo + '\n\n---------------------------ERROR----------------------------'
+                    }
+                    if (xmlhttp.responseText != '' || xmlhttp.responseText != None) {
+                        var input_jsonText = document.getElementById("input_decode");
+                        input_jsonText.value = "";
+                    }
+                }
+            }
+            if (str1.length > 3 && str1.charAt((str1.length - 1)) == '\n') {
+                xmlhttp.open("POST", "/v1/bing/etl/geo_decode", true);
+                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlhttp.send('decode=' + str1);
+            }
+
+        }
+
+    </script>
+
+    <script>
+        function showEncodeHint(str1) {
+            var xmlhttp;
+            if (str1.length == 0) {
+                var s = 1
+            }
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest("Microsoft.XMLHTTP");
+            } else {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var response_json = JSON.parse(xmlhttp.responseText);
+                    if (response_json.errorCode == null) {
+                        document.getElementById("output_encode").innerHTML = response_json.data.toString()
+                    } else {
+                        document.getElementById("output_encode").innerHTML = '---------------------------ERROR----------------------------\n' +
+                            '------------------------------------------------------------\n\n' +
+                            response_json.errorInfo + '\n\n---------------------------ERROR----------------------------'
+                    }
+                    if (xmlhttp.responseText != '' || xmlhttp.responseText != None) {
+                        var input_jsonText = document.getElementById("input_encode");
+                        input_jsonText.value = "";
+                    }
+                }
+            }
+            if (str1.length > 3 && str1.charAt((str1.length - 1)) == '\n') {
+                xmlhttp.open("POST", "/v1/bing/etl/geo_encode", true);
+                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlhttp.send('encode=' + str1);
+            }
+
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        function copyDecodeText() {
+            var input = document.getElementById("output_decode");
+            input.select(); // 选中文本
+            document.execCommand("copy"); // 执行浏览器复制命令
+
+        }
+
+
+    </script>
+
+    <script type="text/javascript">
+        function copyEncodeText() {
+            var input = document.getElementById("output_encode");
+            input.select(); // 选中文本
+            document.execCommand("copy"); // 执行浏览器复制命令
+
+        }
+
+
+    </script>
+
+
+    <style>
+        body {
+            text-align: center
+        }
+
+        #EE {
+            margin: 0 auto;
+            width: 400px;
+            min-height: 200px;
+            max-height: 250px
+        }
+
+
+    </style>
+    <style type="text/css">
+        .textarea-inherit {
+            width: 30%;
+            height: 25%;
+            overflow: auto;
+            word-break: break-all;
+        / / 解决兼容问题
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div>
+
+    <div>
+        <form name="inputform" action="somewhere" method="post">
+                <textarea rows="10" name="decode" class="textarea-inherit" id="input_decode"
+                          onkeyup="showDecodeHint(this.value)"
+                          placeholder="Please enter geohash, e.g :  dfeasd; Then press enter"
+                          value="maindata"></textarea>
+            <textarea rows="10" name="sub" class="textarea-inherit" id="output_decode"
+                      onclick="copyDecodeText()" placeholder="(lat, lon); Click text to copy" readonly></textarea>
+        </form>
+
+    </div>
+
+    <div>
+        <form name="inputform" action="somewhere" method="post">
+                <textarea rows="10" name="decode" class="textarea-inherit" id="input_encode"
+                          onkeyup="showEncodeHint(this.value)"
+                          placeholder="Please enter geographic coordinates, e.g: {'lat': 89.0, 'lon': 179.0}; Then press enter"
+                          value="maindata"></textarea>
+            <textarea rows="10" name="sub" class="textarea-inherit" id="output_encode"
+                      onclick="copyEncodeText()" placeholder="geohash; Click text to copy" readonly></textarea>
+        </form>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

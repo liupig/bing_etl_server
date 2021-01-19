@@ -1,20 +1,23 @@
 from flask import Blueprint, render_template
 
-TEXT_COMPARISON_INDEX = Blueprint("text_comparison_index", __name__)
-JSON_SORT_INDEX = Blueprint("json_sort_index", __name__)
-JSON_STRING_INDEX = Blueprint("json_string_index", __name__)
+SERVER_INDEX = Blueprint("server_index", __name__)
 
 
-@TEXT_COMPARISON_INDEX.route("/textc", methods=["GET"])
+@SERVER_INDEX.route("/textc", methods=["GET"])
 def post_index():
     return render_template('index.html', )
 
 
-@JSON_SORT_INDEX.route("/jsonsort", methods=["GET"])
+@SERVER_INDEX.route("/jsonsort", methods=["GET"])
 def post_json_sort():
     return render_template('jsonSort.html', )
 
 
-@JSON_STRING_INDEX.route("/jsonstring", methods=["GET"])
+@SERVER_INDEX.route("/jsonstring", methods=["GET"])
 def post_json_string():
     return render_template('jsonString.html', )
+
+
+@SERVER_INDEX.route("/geo", methods=["GET"])
+def post_geo():
+    return render_template('geo.html', )
