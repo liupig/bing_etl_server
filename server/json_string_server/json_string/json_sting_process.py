@@ -7,7 +7,7 @@ def json_string(input_data, flag):
     :param input_data:
     :return:
     """
-    if flag:
+    if flag == "true":
         input_data = json.dumps(input_data, ensure_ascii=False, separators=(',', ':'))
     else:
         input_data = json.dumps(input_data, ensure_ascii=False)
