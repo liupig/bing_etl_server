@@ -34,7 +34,7 @@
             if (str1.length > 0 && (str1.charAt((str1.length - 1)) == '}' || str1.charAt((str1.length - 1)) == ']' || str1.charAt((str1.length - 1)) == ')')) {
                 xmlhttp.open("POST", "/v1/bing/etl/jsonstring", true);
                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlhttp.send('main=' + str1);
+                xmlhttp.send('main=' + str1 + "&del_blank_space_flag=" + document.getElementById("del_blank_space_flag").checked);
             }
 
         }
@@ -93,7 +93,7 @@
             <textarea rows="30" name="sub" class="textarea-inherit" id="output_json"
                       onclick="copyText()" placeholder="Click text to copy" readonly></textarea>
             <div>
-                <input name="del_blank_space_flag" type="checkbox" checked="on">Delete the blank space
+                <input name="del_blank_space_flag" id="del_blank_space_flag" type="checkbox" checked="on">Delete the blank space
             </div>
         </form>
 
