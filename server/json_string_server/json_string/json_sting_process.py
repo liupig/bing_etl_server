@@ -1,12 +1,15 @@
 import json
 
 
-def json_string(input_data):
+def json_string(input_data, flag):
     """
     Less time consuming
     :param input_data:
     :return:
     """
-    input_data = json.dumps(input_data, ensure_ascii=False)
+    if flag:
+        input_data = json.dumps(input_data, ensure_ascii=False, separators=(',', ':'))
+    else:
+        input_data = json.dumps(input_data, ensure_ascii=False)
 
     return input_data

@@ -9,6 +9,7 @@ JSON_STRING_API = Blueprint("json_string_api", __name__)
 @JSON_STRING_API.route("/v1/bing/etl/jsonstring", methods=["POST"])
 def post_json_string():
     main = request.form.to_dict().get("main")
+    flag = request.form.to_dict().get("del_blank_space_flag")
     if "'" in main and '"' not in main:
         main = main.replace("'", '"')
     elif "'" in main and '"' in main:
@@ -19,7 +20,7 @@ def post_json_string():
 
     if check_result.get("SecurityCheckResult") == "SUCCEED":
         request_data = json.loads(main)
-        check_result["data"] = json_string(request_data) if main else None
+        check_result["data"] = json_string(request_data, flag) if main else None
         return check_result
     else:
         return check_result
