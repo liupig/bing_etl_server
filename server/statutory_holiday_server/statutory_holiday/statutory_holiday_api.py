@@ -1,4 +1,4 @@
-from flask import request, Blueprint
+from flask import Blueprint, render_template
 from server.statutory_holiday_server.statutory_holiday.statutory_holiday_process import get_statutory_holiday_info, \
     statutory_holiday_info_to_csv
 import json
@@ -21,5 +21,7 @@ def get_statutory_holiday():
         statutory_holiday_info_to_csv()
 
     df = pd.read_csv(STATUTORY_HOLIDAY_PATH + "national_holidays.csv", encoding="utf8")
-    result = pd.DataFrame(df, columns=["name", "startDate", "endDate"]).to_dict(orient="records")
-    return {"result": result, "status": "ok"}
+    data = pd.DataFrame(df, columns=["name", "startDate", "endDate"]).to_dict(orient="records")
+    result = {"result": json.dumps(data, indent=4, ensure_ascii=False), "status": "ok"}
+
+    return render_template("statutoryHoliday.html", variable=result)
